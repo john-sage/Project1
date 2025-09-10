@@ -1,0 +1,41 @@
+pipeline {
+  agent any
+
+  environment {
+    GOOGLE_APPLICATION_CREDENTIALS = "${WORKSPACE}/gcp-creds.json"
+  }
+
+  stages {
+    stage('Checkout Code') {
+      steps {
+        checkout scm  /* Change this to GitHub and authenticate accordingly */
+      }
+    }
+
+    stage('Setup GCP Credentials') {
+      steps {
+        withCredentials([file(credentialsId: 'gcp-creds', variable: 'GCP_CREDS')]) {
+          sh 'cp $GCP_CREDS $GOOGLE_APPLICATION_CREDENTIALS'
+        }
+      }
+    }
+
+    stage('Terraform Init') {
+      steps {
+        sh 'terraform init'
+      }
+    }
+
+    stage('Terraform Plan') {
+      steps {
+        sh 'terraform plan -out=tfplan'
+      }
+    }
+
+    stage('Terraform Apply') {
+      steps {
+        sh 'terraform apply -auto-approve tfplan'
+      }
+    }
+  }
+}
