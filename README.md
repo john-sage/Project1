@@ -9,3 +9,11 @@ Create a separate .yaml file with terraform job. In this we must securely **auth
     In GCP --> IAM --> Service Accounts --> create a SA, then a Key and download the JSON file which we use to authenticate. Store this is GitHub Secrets and call it in the .yaml file.
     In AWS, we create Access Key ID and Secret Access Key, store in secrets and call it.
 Check jenkins-provisioning pipeline script to understand how can we automate using **Jenkins**
+
+
+
+**Setting Up an Amazon EKS Cluster and Node Group Using eksctl**
+https://medium.com/@muppedaanvesh/setting-up-an-amazon-eks-cluster-and-node-group-using-eksctl-52acc808eb83
+
+**Comprehensive Guide to Installing Kubectl, eksctl, and Minikube on Ubuntu**
+https://ssaicharanclan.medium.com/comprehensive-guide-to-installing-kubectl-eksctl-and-minikube-on-ubuntu-7d0effc3a726
